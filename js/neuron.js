@@ -5,7 +5,7 @@ class Neuron {
 
     for (let i = 0; i < n; i++) this.w.push(Math.random())
 
-    this.learningRate = 0.1
+    this.learningRate = 0.01
   }
 
   activate = x => {
@@ -21,7 +21,7 @@ class Neuron {
     trainingSet = this.shuffle([...trainingSet])
 
     let error = 0
-    for (let x in trainingSet) {
+    for (let x of trainingSet) {
       let t = x[2]
       let o = -1
       if (this.activate(x)) o = 1
@@ -34,8 +34,10 @@ class Neuron {
       }
     }
 
+    // errorDOM.value = error
+
     if (error == 0 || currIter >= maxIter) return
-    else self.train(trainingSet, maxIter, currIter + 1)
+    else this.train(trainingSet, maxIter, currIter + 1)
   }
 
   shuffle = a => {

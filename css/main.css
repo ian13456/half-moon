@@ -57,6 +57,21 @@
   margin: 1em;
 }
 
+#weights div input {
+  background: 0;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #eeeeee;
+  font-size: 1.2em;
+  margin: 1em;
+}
+
+#weights div input:focus {
+  outline: none;
+}
+
 #display {
   display: flex;
   flex-direction: column;
