@@ -3,6 +3,8 @@ class Neuron {
     this.w = []
     this.w.push(Math.random())
 
+    this.n = n
+
     for (let i = 0; i < n; i++) this.w.push(Math.random())
 
     this.learningRate = 0.01
@@ -49,5 +51,12 @@ class Neuron {
       a[j] = x
     }
     return a
+  }
+
+  randomizeWeights = () => {
+    this.w = []
+    this.w.push(Math.random())
+
+    for (let i = 0; i < this.n; i++) this.w.push(Math.random())
   }
 }
