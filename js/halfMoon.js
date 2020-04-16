@@ -7,32 +7,42 @@ for (let i = 0; i < NUMBER_OF_POINTS; i++) {
 
 function getModifiedPoints(points) {
   const newPoints = []
+  const output = []
 
   for (let point of points) {
-    if (point[1] > Math.PI)
+    if (point[1] > Math.PI) {
       newPoints.push([
-        (RADIUS_RANGE[0] + point[0] * (RADIUS_RANGE[1] - RADIUS_RANGE[0])) *
+        ((RADIUS_RANGE[0] + point[0] * (RADIUS_RANGE[1] - RADIUS_RANGE[0])) *
           Math.cos(point[1]) -
-          RADIUS_RANGE[0] / 2,
-        (RADIUS_RANGE[0] + point[0] * (RADIUS_RANGE[1] - RADIUS_RANGE[0])) *
+          RADIUS_RANGE[0] / 2 +
+          CANVAS_DIMENSION / 2) /
+          CANVAS_DIMENSION,
+        ((RADIUS_RANGE[0] + point[0] * (RADIUS_RANGE[1] - RADIUS_RANGE[0])) *
           Math.sin(point[1]) -
-          DISTANCE / 2,
-        1
+          DISTANCE / 2 +
+          CANVAS_DIMENSION / 2) /
+          CANVAS_DIMENSION
       ])
-    else
+      output.push([1])
+    } else {
       newPoints.push([
-        (RADIUS_RANGE[0] + point[0] * (RADIUS_RANGE[1] - RADIUS_RANGE[0])) *
+        ((RADIUS_RANGE[0] + point[0] * (RADIUS_RANGE[1] - RADIUS_RANGE[0])) *
           Math.cos(point[1]) +
           (RADIUS_RANGE[0] + RADIUS_RANGE[1]) / 2 -
-          RADIUS_RANGE[0] / 2,
-        (RADIUS_RANGE[0] + point[0] * (RADIUS_RANGE[1] - RADIUS_RANGE[0])) *
+          RADIUS_RANGE[0] / 2 +
+          CANVAS_DIMENSION / 2) /
+          CANVAS_DIMENSION,
+        ((RADIUS_RANGE[0] + point[0] * (RADIUS_RANGE[1] - RADIUS_RANGE[0])) *
           Math.sin(point[1]) +
-          DISTANCE / 2,
-        0
+          DISTANCE / 2 +
+          CANVAS_DIMENSION / 2) /
+          CANVAS_DIMENSION
       ])
+      output.push([0])
+    }
   }
 
-  return newPoints
+  return { data: newPoints, output }
 }
 
 function train(neuron) {

@@ -81,23 +81,30 @@
   margin: auto;
 }
 
-#my-cvs {
-  background: #393e46;
-}
-
 #title {
-  padding: 0.4em;
   color: #eeeeee;
   font-size: 3em;
 }
 
-#equation,
-#epoch {
+#credits {
   color: #eeeeee;
   font-size: 1.2em;
-  margin: 0.8em;
+  margin-bottom: 0.6em;
 }
 
 body {
   background: #222831;
+}
+
+#epoch,
+#loss {
+  color: #eeeeee;
+}
+
+#epoch {
+  font-size: 1.5em;
+}
+
+#loss {
+  font-size: 1.2em;
 }

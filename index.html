@@ -13,42 +13,23 @@
 
     <script src="libs/p5.js"></script>
     <script src="libs/p5.sound.js"></script>
-    <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
+    <!-- Import TensorFlow.js -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <!-- Import tfjs-vis -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
   </head>
   <body>
     <div id="wrapper">
-      <div id="weights">
-        <div id="w0">
-          Radius #1:
-          <input id="radius1" type="number" min="0" max="200" value="50" />
-        </div>
-        <div id="w1">
-          Radius #2:
-          <input id="radius2" type="number" min="0" max="200" value="60" />
-        </div>
-        <div id="w2">
-          Distance:
-          <input id="distance" type="number" min="-100" max="100" value="50" />
-        </div>
-      </div>
-
       <div id="display">
         <div id="title">Double Half Moon</div>
+        <div id="credits">Made by Ian Huang</div>
         <div id="my-cvs"></div>
-        <div id="equation">Made by Ian Huang</div>
-      </div>
-
-      <div id="controls">
-        <button id="randomize">Randomize</button>
-        <button onclick="train(neuron)">Train</button>
+        <div id="epoch">Epoch: 0</div>
+        <div id="loss">Loss: NULL</div>
       </div>
     </div>
 
     <script src="js/config.js"></script>
-    <script src="js/domElements.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/neuron.js"></script>
     <script src="js/halfMoon.js"></script>
     <script src="js/visualizer.js"></script>
     <script src="js/sketch.js"></script>
