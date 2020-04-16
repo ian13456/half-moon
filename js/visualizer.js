@@ -45,8 +45,9 @@ class Visualizer {
   }
 
   updateEpochLoss = (loss) => {
-    console.log(loss)
     this.epochDOM.innerHTML = `Epoch: ${this.epoch++}`
     this.lossDOM.innerHTML = `Loss: ${loss.toFixed(3)}`
   }
+
+  addSample = (sample) => {}
 }

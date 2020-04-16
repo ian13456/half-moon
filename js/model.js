@@ -1,14 +1,14 @@
 class HalfMoonModel {
-  constructor() {
+  constructor(xs, ys, minError) {
     this.model = tf.sequential()
     let hidden1 = tf.layers.dense({
       inputShape: [2],
       units: 16,
-      activation: 'sigmoid'
+      activation: 'tanh'
     })
     let hidden2 = tf.layers.dense({
       units: 8,
-      activation: 'tanh'
+      activation: 'sigmoid'
     })
     let output = tf.layers.dense({
       units: 1,
@@ -23,24 +23,55 @@ class HalfMoonModel {
       optimizer: optimizer,
       loss: 'meanSquaredError'
     })
+
+    this.config = {
+      minError
+    }
+
+    this.xs = xs
+    this.ys = ys
+
+    this.paused = false
+    this.pauseButton = document.getElementById('pause')
+    this.pauseButton.addEventListener('click', () => {
+      if (this.paused) {
+        this.paused = false
+        this.pauseButton.innerHTML = 'resume'
+        this.train()
+      } else {
+        this.paused = true
+        this.pauseButton.innerHTML = 'pause'
+      }
+    })
   }
 
   train = () => {
-    setTimeout(this.trainSelf, timeout)
+    setTimeout(() => this.trainSelf(), timeout)
   }
 
   trainSelf = () => {
     this.trainModel().then((result) => {
       // /console.log(result.history.loss[0]);
-      visualizer.updateEpochLoss(result.history.loss[0])
-      setTimeout(this.trainSelf, timeout)
+      const loss = result.history.loss[0]
+      visualizer.updateEpochLoss(loss)
+      if (loss > this.config.minError) {
+        if (!this.paused) {
+          setTimeout(() => this.trainSelf(), timeout)
+        }
+      } else {
+        this.pauseButton.disabled = true
+      }
     })
   }
 
   trainModel = () => {
-    return this.model.fit(train_xs, train_ys, {
+    return this.model.fit(this.xs, this.ys, {
       shuffle: true,
       epochs: 1
     })
+  }
+
+  predict = (xs) => {
+    return this.model.predict(xs)
   }
 }

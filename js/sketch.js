@@ -4,21 +4,24 @@
 // https://youtu.be/N3ZnNa01BPM
 
 let nn
-let xs
 let model
 let cols
 let rows
 let inputs
 let visualizer
+let gridSamples
+let dotSamples
 let resolution = 20
 let learningRate = 0.2
 
+const timeout = 1
 const { data, output } = getModifiedPoints(points)
 const train_xs = tf.tensor2d(data)
 const train_ys = tf.tensor2d(output)
-visualizer = new Visualizer(data, output)
+const dataClone = JSON.parse(JSON.stringify(data))
+dotSamples = train_xs.clone()
 
-const timeout = 1
+visualizer = new Visualizer(data, output)
 
 function setup() {
   createCanvas(CANVAS_DIMENSION, CANVAS_DIMENSION).parent('my-cvs')
@@ -34,62 +37,24 @@ function setup() {
       inputs.push([x1, x2])
     }
   }
-  xs = tf.tensor2d(inputs)
+  gridSamples = tf.tensor2d(inputs)
 
-  model = tf.sequential()
-  let hidden1 = tf.layers.dense({
-    inputShape: [2],
-    units: 16,
-    activation: 'sigmoid'
-  })
-  let hidden2 = tf.layers.dense({
-    units: 8,
-    activation: 'tanh'
-  })
-  let output = tf.layers.dense({
-    units: 1,
-    activation: 'sigmoid'
-  })
-  model.add(hidden1)
-  model.add(hidden2)
-  model.add(output)
-
-  const optimizer = tf.train.adam(learningRate)
-  model.compile({
-    optimizer: optimizer,
-    loss: 'meanSquaredError'
-  })
-
-  setTimeout(train, timeout)
-}
-
-function train() {
-  trainModel().then((result) => {
-    // /console.log(result.history.loss[0]);
-    visualizer.updateEpochLoss(result.history.loss[0])
-    setTimeout(train, timeout)
-  })
-}
-
-function trainModel() {
-  return model.fit(train_xs, train_ys, {
-    shuffle: true,
-    // batchSize: 32,
-    epochs: 1
-  })
+  model = new HalfMoonModel(train_xs, train_ys, 0.001)
+  model.train()
 }
 
 function draw() {
-  background(0)
+  if (!model.paused) {
+    background(0)
+    tf.tidy(() => {
+      // Get the predictions
+      let ys = model.predict(gridSamples)
+      let y_values = ys.dataSync()
+      visualizer.drawGrids(y_values)
 
-  tf.tidy(() => {
-    // Get the predictions
-    let ys = model.predict(xs)
-    let y_values = ys.dataSync()
-    visualizer.drawGrids(y_values)
-
-    let ys2 = model.predict(train_xs)
-    let y2_values = ys2.dataSync()
-    visualizer.drawSamples(y2_values)
-  })
+      let ys2 = model.predict(dotSamples)
+      let y2_values = ys2.dataSync()
+      visualizer.drawSamples(y2_values)
+    })
+  }
 }

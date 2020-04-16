@@ -21,54 +21,30 @@
   left: 0;
 }
 
-/* #my-cvs {
-  width: 50vh;
-  height: 50vh;
-} */
+#my-cvs {
+  position: relative;
+}
 
 #controls {
   position: absolute;
-  right: 0;
+  width: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #controls button {
-  margin: 1.2em;
-  background: transparent;
-  border: 2px solid #17bebb;
-  color: #17bebb;
-  padding: 1em;
-  transition: 0.2s all;
+  margin: 0.5em;
+  font-size: 1em;
+  padding: 0.5em;
   cursor: pointer;
-  font-size: 1.2em;
-}
-
-#controls button:active {
-  padding-top: 10px;
-  background: #d7fbf6;
+  background: #1b262c;
+  color: #eeeeee;
 }
 
 #controls button:focus {
-  outline: none;
-}
-
-#weights div {
-  color: #eeeeee;
-  font-size: 1.2em;
-  margin: 1em;
-}
-
-#weights div input {
-  background: 0;
-  border: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #eeeeee;
-  font-size: 1.2em;
-  margin: 1em;
-}
-
-#weights div input:focus {
   outline: none;
 }
 
