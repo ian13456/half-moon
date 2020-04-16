@@ -81,6 +81,10 @@
   margin: auto;
 }
 
+#my-cvs {
+  background: #393e46;
+}
+
 #title {
   padding: 0.4em;
   color: #eeeeee;

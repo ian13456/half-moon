@@ -1,4 +1,6 @@
 const CANVAS_DIMENSION = 500
-const NUMBER_OF_POINTS = 2000
+const NUMBER_OF_POINTS = 300
+const UP = 'UP'
+const DOWN = 'DOWN'
 let RADIUS_RANGE = [100, 110]
 let DISTANCE = -50

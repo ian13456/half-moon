@@ -28,6 +28,8 @@ distanceDOM.addEventListener('change', ({ target: { value } }) => {
   DISTANCE = Number(value)
 })
 
-RADIUS_RANGE[0] = Number(radius1DOM.value)
-RADIUS_RANGE[1] = Number(radius2DOM.value)
-DISTANCE = Number(distanceDOM.value)
+radius1DOM.value = RADIUS_RANGE[0]
+radius2DOM.value = RADIUS_RANGE[1]
+// RADIUS_RANGE[0] = Number(radius1DOM.value)
+// RADIUS_RANGE[1] = Number(radius2DOM.value)
+distanceDOM.value = DISTANCE
