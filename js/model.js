@@ -6,16 +6,11 @@ class HalfMoonModel {
       units: 16,
       activation: 'tanh'
     })
-    let hidden2 = tf.layers.dense({
-      units: 8,
-      activation: 'sigmoid'
-    })
     let output = tf.layers.dense({
       units: 1,
       activation: 'sigmoid'
     })
     this.model.add(hidden1)
-    this.model.add(hidden2)
     this.model.add(output)
 
     const optimizer = tf.train.adam(learningRate)

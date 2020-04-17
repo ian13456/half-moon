@@ -3,4 +3,4 @@ const NUMBER_OF_POINTS = 1000
 const UP = 'UP'
 const DOWN = 'DOWN'
 let RADIUS_RANGE = [140, 150]
-let DISTANCE = -50
+let DISTANCE = -140
