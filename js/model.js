@@ -36,11 +36,11 @@ class HalfMoonModel {
     this.pauseButton.addEventListener('click', () => {
       if (this.paused) {
         this.paused = false
-        this.pauseButton.innerHTML = 'resume'
+        this.pauseButton.innerHTML = 'pause'
         this.train()
       } else {
         this.paused = true
-        this.pauseButton.innerHTML = 'pause'
+        this.pauseButton.innerHTML = 'resume'
       }
     })
   }
