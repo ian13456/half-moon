@@ -1,12 +1,12 @@
 class HalfMoonModel {
   constructor(xs, ys, minError) {
     this.model = tf.sequential()
-    let hidden1 = tf.layers.dense({
+    const hidden1 = tf.layers.dense({
       inputShape: [2],
-      units: 16,
+      units: 20,
       activation: 'relu'
     })
-    let output = tf.layers.dense({
+    const output = tf.layers.dense({
       units: 1,
       activation: 'sigmoid'
     })
