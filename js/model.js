@@ -4,7 +4,7 @@ class HalfMoonModel {
     let hidden1 = tf.layers.dense({
       inputShape: [2],
       units: 16,
-      activation: 'tanh'
+      activation: 'relu'
     })
     let output = tf.layers.dense({
       units: 1,
